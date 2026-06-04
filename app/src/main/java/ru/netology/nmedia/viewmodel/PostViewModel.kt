@@ -11,10 +11,9 @@ import ru.netology.nmedia.model.FeedModel
 import ru.netology.nmedia.repository.PostRepositoryNetworkImpl
 import kotlin.concurrent.thread
 
-
 private val empty = Post()
 class PostViewModel(application: Application): AndroidViewModel(application) {
-    
+
 
     private val draft_message = MutableLiveData<String?>()
     val draftMessage: LiveData<String?> = draft_message
