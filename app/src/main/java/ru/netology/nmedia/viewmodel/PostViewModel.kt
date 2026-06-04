@@ -11,6 +11,7 @@ import ru.netology.nmedia.model.FeedModel
 import ru.netology.nmedia.repository.PostRepositoryNetworkImpl
 import kotlin.concurrent.thread
 
+
 private val empty = Post()
 class PostViewModel(application: Application): AndroidViewModel(application) {
 
