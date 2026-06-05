@@ -19,6 +19,6 @@
     <string name="channel_remote_name">Server notifications</string>
     <string name="channel_remote_description">Notifications from remote server</string>
     <string name="network_error" />
-    <string name="retr" />
     <string name="retry" />
+    <string name="no_posts">No posts</string>
 </resources>
