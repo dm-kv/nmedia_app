@@ -1,5 +1,6 @@
 package ru.netology.nmedia.repository
 
+
 import com.google.gson.Gson
 import java.util.concurrent.TimeUnit
 import okhttp3.OkHttpClient
@@ -9,6 +10,7 @@ import okhttp3.Call
 import com.google.gson.reflect.TypeToken
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+
 
 class PostRepositoryNetworkImpl: PostRepository {
     private companion object{
