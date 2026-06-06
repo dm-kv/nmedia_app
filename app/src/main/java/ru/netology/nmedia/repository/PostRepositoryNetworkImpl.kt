@@ -11,7 +11,6 @@ import com.google.gson.reflect.TypeToken
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
 
-
 class PostRepositoryNetworkImpl: PostRepository {
     private companion object{
         const val BASE_URL = "http://10.0.2.2:9999/api/slow/"
