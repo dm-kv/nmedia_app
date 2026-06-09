@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="error" type="id">Error Group</item>
-    <item name="errorGroup" type="id" />
-    <item name="empty" type="id" />
-</resources>

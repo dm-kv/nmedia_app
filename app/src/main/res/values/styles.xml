@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
     <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
@@ -13,4 +13,7 @@
         <item name="buttonTint">?attr/colorControlNormal</item>
     </style>
 
+
+    <item name="errorGroup" type="id" />
+    <item name="empty" type="id" />
 </resources>

@@ -1,24 +1,27 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string name="app_name">Nmedia</string>
     <string name="nmedia">NMedia!</string>
     <string name="description_post_author_avatar">Post author avatar</string>
-    <string name="remove_menu"><![CDATA[Remove/> </menu>]]></string>
+    <string name="remove_menu">Remove</string>
     <string name="post_input_hint">Post content</string>
     <string name="content_is_blank_error">Content is blank!</string>
-    <string name="edit_menu" />
+    <string name="edit_menu"/>
+    <string name="like">Like</string>
+    <string name="views">Views</string>
+    <string name="share">Share</string>
     <string name="remove">Remove</string>
     <string name="edit">Edit</string>
-    <string name="like">Like</string>
     <string name="description_post_share" />
-    <string name="error_empty_content" />
+    <string name="error_empty_content"/>
     <string name="description_post_save" />
     <string name="description_background_video" />
-    <string name="description_play" />
+    <string name="description_play"/>
     <string name="notification_user_liked">User %1$s liked %2$s\'s post</string>
     <string name="channel_remote_name">Server notifications</string>
     <string name="channel_remote_description">Notifications from remote server</string>
-    <string name="network_error" />
-    <string name="retry" />
+    <string name="network_error"/>
+    <string name="retry"/>
     <string name="no_posts">No posts</string>
+
 </resources>

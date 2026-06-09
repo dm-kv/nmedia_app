@@ -11,9 +11,11 @@
         android:id="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:autofillHints=""
         android:background="@android:color/transparent"
         android:gravity="start|top"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        tools:ignore="LabelFor" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
