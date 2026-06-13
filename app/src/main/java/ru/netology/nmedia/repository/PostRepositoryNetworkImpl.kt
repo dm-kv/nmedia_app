@@ -10,6 +10,7 @@ import okhttp3.Call
 import com.google.gson.reflect.TypeToken
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.RequestBody
 
 class PostRepositoryNetworkImpl: PostRepository {
     private companion object{
@@ -37,8 +38,42 @@ class PostRepositoryNetworkImpl: PostRepository {
     }
 
     override fun likeById(id: Long) {
-        TODO("Not yet implemented")
+        val currentPosts = get()
+        val post = currentPosts.find { it.id == id }
+
+        if (post?.likedByMe == true) {
+            removeLike(id)
+        } else {
+            addLike(id)
+        }
     }
+
+
+    private fun addLike(id: Long): Post {
+        val request: Request = Request.Builder()
+            .url("${BASE_URL}posts/$id/likes")
+            .post(RequestBody.create(null, ""))
+            .build()
+
+        val call: Call = client.newCall(request)
+        val response = call.execute()
+
+        return gson.fromJson(response.body?.string(), Post::class.java)
+    }
+
+    private fun removeLike(id: Long): Post {
+        val request: Request = Request.Builder()
+            .url("${BASE_URL}posts/$id/likes")
+            .delete()
+            .build()
+
+        val call: Call = client.newCall(request)
+        val response = call.execute()
+
+        return gson.fromJson(response.body?.string(), Post::class.java)
+    }
+
+
 
     override fun shareById(id: Long) {
         TODO("Not yet implemented")

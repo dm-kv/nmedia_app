@@ -9,9 +9,21 @@ import ru.netology.nmedia.repository.PostRepository
 import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.model.FeedModel
 import ru.netology.nmedia.repository.PostRepositoryNetworkImpl
+import ru.netology.nmedia.utils.SingleLiveEvent
+import kotlin.Long
 import kotlin.concurrent.thread
 
-private val empty = Post()
+
+private val empty = Post(
+    id = 0,
+    author = "",
+    published = 0,
+    content = "",
+    likes = 0,
+    shares = 0,
+    likedByMe = false,
+    video = null,
+)
 class PostViewModel(application: Application): AndroidViewModel(application) {
 
 
@@ -34,24 +46,56 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
 
     val edited = MutableLiveData(empty)
 
+    private val _postCreated = SingleLiveEvent<Unit>()
+    val postCreated: LiveData<Unit>
+        get() = _postCreated
+
     init {
         loadPosts()
     }
 
-    fun likeById(id: Long) = repository.likeById(id)
+    fun likeById(id: Long) {
+        thread {
+            try {
+                val updatedPost = repository.likeById(id)
+                val currentData = _data.value
+
+                if (currentData != null) {
+                    val updatedPosts: List<Post> = currentData.posts.map { post ->
+                        (if (post.id == id) updatedPost else post) as Post
+                    }
+                    _data.postValue(
+                        currentData.copy(
+                            posts = updatedPosts,
+                            needsReload = true
+                        )
+                    )
+                }
+            } catch (e: Exception) {
+                loadPosts()
+                e.printStackTrace()
+            }
+        }
+    }
     fun shareById(id: Long) = repository.shareById(id)
     fun removeById(id: Long) = repository.removeById(id)
 
     fun saveContent(content: String) {
-        edited.value?.let { post ->
-            val trimmed = content.trim()
+        thread {
+            try {
+                edited.value?.let { post ->
+                    val trimmed = content.trim()
+                    if (post.content != trimmed) {
+                        val result = repository.save(post.copy(content = trimmed))
+                        println(result)
 
-            if (post.content != trimmed) {
-                repository.save(
-                    post.copy(content = trimmed)
-                )
+                        _postCreated.postValue(Unit)
+                        edited.postValue(empty)
+                    }
+                }
+            } catch (e: Exception){
+                e.printStackTrace()
             }
-            edited.value = empty
         }
     }
 

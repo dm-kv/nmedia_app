@@ -10,7 +10,7 @@ data class PostEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val author: String = "",
-    val published: String = "",
+    val published: Long = 0,
     val content: String = "",
     val likes: Int = 0,
     val shares: Int = 0,
