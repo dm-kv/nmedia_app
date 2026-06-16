@@ -11,6 +11,7 @@ import ru.netology.nmedia.dto.Post
 import java.math.RoundingMode
 import android.view.View
 import ru.netology.nmedia.databinding.CardPostBinding
+import ru.netology.nmedia.activity.AppActivity
 
 
 interface PostListener {
@@ -50,6 +51,7 @@ class PostViewHolder(
     private val listener: PostListener,
     ): RecyclerView.ViewHolder(binding.root) {
     fun bind(post: Post) {
+
         with (binding) {
             author.text = post.author
             published.text = post.published.toString()
@@ -57,6 +59,8 @@ class PostViewHolder(
             like.isChecked = post.likedByMe
             like.text = checkTheDigit(post.likes)
             share.text = checkTheDigit(post.shares)
+
+
 
             if (post.video == null) {
                 binding.playVideoGroup.visibility = View.GONE

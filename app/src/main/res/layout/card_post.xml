@@ -24,6 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:srcCompat="@sample/posts_avatars"/>
 
+
         <TextView
             android:id="@+id/author"
             android:textColor="#000"
