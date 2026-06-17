@@ -20,6 +20,8 @@ import ru.netology.nmedia.viewmodel.PostViewModel
 import kotlin.getValue
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+
 
 
 class CardPostFragment : Fragment() {
@@ -32,11 +34,17 @@ class CardPostFragment : Fragment() {
             layoutParams = ViewGroup.LayoutParams(100, 100)
             scaleType = ImageView.ScaleType.CENTER_CROP
         }
+
         (binding.root as? ViewGroup)?.addView(avatarImageView)
+
+        val requestOptions = RequestOptions()
+            .timeout(15_000)
+
         Glide.with(binding.root.context)
             .load("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
             .error(R.drawable.outline_cancel_24)
             .circleCrop()
+            .apply(requestOptions)
             .into(avatarImageView)
     }
 
@@ -45,7 +53,7 @@ class CardPostFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        
+
         val binding = FragmentCardPostBinding.inflate(layoutInflater)
         val listener = object : PostListener {
 
@@ -58,7 +66,7 @@ class CardPostFragment : Fragment() {
                     }
                 )
             }
-            
+
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
                 findNavController().navigate(
