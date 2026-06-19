@@ -17,8 +17,6 @@ import android.os.Build
 import com.google.firebase.messaging.FirebaseMessaging
 
 
-
-
 class AppActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

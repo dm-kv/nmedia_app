@@ -23,5 +23,6 @@
     <string name="network_error"/>
     <string name="retry"/>
     <string name="no_posts">No posts</string>
+    <string name="avatar_description" />
 
 </resources>

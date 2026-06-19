@@ -18,35 +18,11 @@ import ru.netology.nmedia.dto.Post
 import ru.netology.nmedia.fragment.NewPostFragment.Companion.contentArg
 import ru.netology.nmedia.viewmodel.PostViewModel
 import kotlin.getValue
-import android.widget.ImageView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-
 
 
 class CardPostFragment : Fragment() {
 
     private val viewModel: PostViewModel by activityViewModels()
-
-    private fun setupAvatar(binding: FragmentCardPostBinding, post: Post) {
-        val avatarImageView = ImageView(binding.root.context).apply {
-            id = View.generateViewId()
-            layoutParams = ViewGroup.LayoutParams(100, 100)
-            scaleType = ImageView.ScaleType.CENTER_CROP
-        }
-
-        (binding.root as? ViewGroup)?.addView(avatarImageView)
-
-        val requestOptions = RequestOptions()
-            .timeout(15_000)
-
-        Glide.with(binding.root.context)
-            .load("http://10.0.2.2:9999/avatars/${post.authorAvatar}")
-            .error(R.drawable.outline_cancel_24)
-            .circleCrop()
-            .apply(requestOptions)
-            .into(avatarImageView)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +32,7 @@ class CardPostFragment : Fragment() {
 
         val binding = FragmentCardPostBinding.inflate(layoutInflater)
         val listener = object : PostListener {
+
 
 
             override fun onContent(post: Post) {
@@ -109,7 +86,7 @@ class CardPostFragment : Fragment() {
             val post = state.posts.find { it.id == arguments?.idArg }
             if (post != null) {
                 holder.bind(post)
-                setupAvatar(binding, post)
+
             } else {
                 "Post not found"
             }
