@@ -16,7 +16,9 @@ import android.content.pm.PackageManager
 import android.os.Build
 import com.google.firebase.messaging.FirebaseMessaging
 
+
 class AppActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,6 +31,8 @@ class AppActivity : AppCompatActivity() {
         }
 
         requestNotificationsPermission()
+
+
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.container) as NavHostFragment
         val navController = navHostFragment.navController
@@ -76,4 +80,5 @@ class AppActivity : AppCompatActivity() {
 
         requestPermissions(arrayOf(permission), 1)
     }
+
 }

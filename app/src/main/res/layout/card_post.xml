@@ -17,12 +17,13 @@
         <ImageView
             android:id="@+id/avatar"
             android:layout_width="48dp"
-            android:layout_height="@dimen/avatar_size"
-            android:contentDescription="@string/description_post_author_avatar"
-            android:src="@drawable/ic_netology"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="48dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/avatar_description"
             app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@sample/posts_avatars"/>
+            app:layout_constraintTop_toTopOf="@+id/author"
+            app:shapeAppearance="@style/RoundedAvatar" />
+
 
         <TextView
             android:id="@+id/author"

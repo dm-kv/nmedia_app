@@ -20,7 +20,6 @@ class PostRepositoryNetworkImpl: PostRepository {
                 }
 
             }
-
     }
 
     override fun getAsync(callback: PostRepository.PostCallback<List<Post>>) {
@@ -48,7 +47,6 @@ class PostRepositoryNetworkImpl: PostRepository {
             }
         })
     }
-
 
 
     override fun likeById(

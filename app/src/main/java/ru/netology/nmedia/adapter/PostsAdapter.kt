@@ -11,6 +11,7 @@ import ru.netology.nmedia.dto.Post
 import java.math.RoundingMode
 import android.view.View
 import ru.netology.nmedia.databinding.CardPostBinding
+import com.bumptech.glide.Glide
 
 
 interface PostListener {
@@ -31,12 +32,15 @@ fun checkTheDigit(digit: Int,) = when(digit) {
 
 class PostsAdapter(
     private val listener: PostListener,
-    ): ListAdapter<Post, PostViewHolder>(PostDiffCallback)
-{
+) : ListAdapter<Post, PostViewHolder>(PostDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return PostViewHolder(binding,listener,)
+        val binding = CardPostBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return PostViewHolder(binding, listener)
     }
 
     override fun onBindViewHolder(viewHolder: PostViewHolder, position: Int) {
@@ -48,9 +52,10 @@ class PostsAdapter(
 class PostViewHolder(
     private val binding: CardPostBinding,
     private val listener: PostListener,
-    ): RecyclerView.ViewHolder(binding.root) {
+) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(post: Post) {
-        with (binding) {
+        with(binding) {
             author.text = post.author
             published.text = post.published.toString()
             content.text = post.content
@@ -58,16 +63,18 @@ class PostViewHolder(
             like.text = checkTheDigit(post.likes)
             share.text = checkTheDigit(post.shares)
 
+            // Загрузка аватара через Glide
+            loadAvatar(post.authorAvatar)
+
             if (post.video == null) {
-                binding.playVideoGroup.visibility = View.GONE
+                playVideoGroup.visibility = View.GONE
             } else {
-                binding.playVideoGroup.visibility = View.VISIBLE
+                playVideoGroup.visibility = View.VISIBLE
             }
 
             menu.setOnClickListener {
                 PopupMenu(it.context, it).apply {
                     inflate(R.menu.menu_post)
-
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.remove -> {
@@ -84,22 +91,34 @@ class PostViewHolder(
                     show()
                 }
             }
-            like.setOnClickListener {
-                listener.onLike(post)
-            }
-            share.setOnClickListener {
-                listener.onShare(post)
-            }
-            play.setOnClickListener {
-                listener.onVideo(post)
-            }
-            backgroundVideo.setOnClickListener {
-                listener.onVideo(post)
-            }
-            content.setOnClickListener {
-                listener.onContent(post)
-            }
+
+            like.setOnClickListener { listener.onLike(post) }
+            share.setOnClickListener { listener.onShare(post) }
+            play.setOnClickListener { listener.onVideo(post) }
+            backgroundVideo.setOnClickListener { listener.onVideo(post) }
+            content.setOnClickListener { listener.onContent(post) }
         }
+    }
+
+    private fun loadAvatar(avatarName: String?) {
+        if (avatarName.isNullOrEmpty()) {
+
+            Glide.with(itemView.context)
+                .load(R.drawable.ic_notification)
+                .circleCrop()
+                .into(binding.avatar)
+            return
+        }
+
+        val avatarUrl = "http://10.0.2.2:9999/avatars/$avatarName"
+
+        Glide.with(itemView.context)
+            .load(avatarUrl)
+            .placeholder(R.drawable.ic_notification)
+            .error(R.drawable.outline_cancel_24)
+            .circleCrop()
+            .timeout(10_000)
+            .into(binding.avatar)
     }
 }
 object PostDiffCallback: DiffUtil.ItemCallback<Post>() {

@@ -13,6 +13,11 @@
         <item name="buttonTint">?attr/colorControlNormal</item>
     </style>
 
+    <style name="RoundedAvatar">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
+
 
     <item name="errorGroup" type="id" />
     <item name="empty" type="id" />

@@ -29,10 +29,12 @@ class CardPostFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        
+
         val binding = FragmentCardPostBinding.inflate(layoutInflater)
         val listener = object : PostListener {
-            
+
+
+
             override fun onContent(post: Post) {
                 findNavController().navigate(
                     R.id.action_feedFragment_to_cardPostFragment,
@@ -41,7 +43,7 @@ class CardPostFragment : Fragment() {
                     }
                 )
             }
-            
+
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
                 findNavController().navigate(
@@ -84,6 +86,7 @@ class CardPostFragment : Fragment() {
             val post = state.posts.find { it.id == arguments?.idArg }
             if (post != null) {
                 holder.bind(post)
+
             } else {
                 "Post not found"
             }
