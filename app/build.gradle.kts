@@ -26,6 +26,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
@@ -36,9 +37,11 @@ android {
                 "proguard-rules.pro"
             )
             manifestPlaceholders["usesCleartextTraffic"] = false
+            buildConfigField("String", "BASE_URL", "\"https:// netology.ru\"")
         }
         debug {
             manifestPlaceholders["usesCleartextTraffic"] = true
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:9999\"")
         }
     }
     compileOptions {
@@ -70,6 +73,7 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation (libs.glide)
+    implementation(libs.logging.interceptor)
     annotationProcessor (libs.compiler)
     ksp(libs.androidx.room.compiler)
     testImplementation(libs.junit)

@@ -18,7 +18,6 @@ class PostRepositoryNetworkImpl: PostRepository {
                 } else {
                     throw RuntimeException(it.message())
                 }
-
             }
     }
 

@@ -91,7 +91,7 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
         })
     }
 
-    fun saveContent(content: String) {
+    fun save(content: String) {
         edited.value?.let {
             repository.save(it, object : PostRepository.PostCallback<Post> {
                 override fun onSuccess(result: Post) {
