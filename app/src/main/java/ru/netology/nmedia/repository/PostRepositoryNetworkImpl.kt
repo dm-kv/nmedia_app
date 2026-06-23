@@ -26,6 +26,7 @@ class PostRepositoryNetworkImpl: PostRepository {
             override fun onResponse(call: Call<List<Post>>, response: Response<List<Post>>) {
                 if (!response.isSuccessful) {
                     when (response.code()) {
+                        401 -> callback.onError(RuntimeException("unauthorized"))
                         404 -> callback.onError(RuntimeException("Post not found"))
                         500 -> callback.onError(RuntimeException("Server error"))
                         else -> callback.onError(RuntimeException("Error: ${response.code()}"))
@@ -63,6 +64,7 @@ class PostRepositoryNetworkImpl: PostRepository {
             override fun onResponse(call: Call<Post>, response: Response<Post>) {
                 if (!response.isSuccessful) {
                     when (response.code()) {
+                        401 -> callback.onError(RuntimeException("unauthorized"))
                         404 -> callback.onError(RuntimeException("Post not found"))
                         500 -> callback.onError(RuntimeException("Server error"))
                         else -> callback.onError(RuntimeException("Error: ${response.code()}"))
@@ -94,6 +96,7 @@ class PostRepositoryNetworkImpl: PostRepository {
                 override fun onResponse(call: Call<Post>, response: Response<Post>) {
                     if (!response.isSuccessful) {
                         when (response.code()) {
+                            401 -> callback.onError(RuntimeException("unauthorized"))
                             404 -> callback.onError(RuntimeException("Post not found"))
                             500 -> callback.onError(RuntimeException("Server error"))
                             else -> callback.onError(RuntimeException("Error: ${response.code()}"))
@@ -121,6 +124,7 @@ class PostRepositoryNetworkImpl: PostRepository {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                     if (!response.isSuccessful) {
                         when (response.code()) {
+                            401 -> callback.onError(RuntimeException("unauthorized"))
                             404 -> callback.onError(RuntimeException("Post not found"))
                             500 -> callback.onError(RuntimeException("Server error"))
                             else -> callback.onError(RuntimeException("Error: ${response.code()}"))
