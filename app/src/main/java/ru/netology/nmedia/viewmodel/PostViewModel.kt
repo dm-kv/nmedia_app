@@ -70,7 +70,7 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
             }
 
             override fun onError(error: Throwable) {
-                _data.value
+                _data.postValue(currentState)
             }
         })
     }
@@ -91,9 +91,9 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
         })
     }
 
-    fun saveContent(content: String) {
+    fun save(content: String) {
         edited.value?.let {
-            repository.save(it, object : PostRepository.PostCallback<Post> {
+            repository.save(it.copy(content = content), object : PostRepository.PostCallback<Post> {
                 override fun onSuccess(result: Post) {
 
                     _postCreated.postValue(Unit)
@@ -104,7 +104,6 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
                 }
             })
         }
-        edited.value = empty
     }
 
     fun edit(post: Post) {
